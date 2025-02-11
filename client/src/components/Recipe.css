@@ -1,0 +1,47 @@
+@import url("../variable.css");
+
+.recipe-section {
+  font-family: var(--font-family, Arial, sans-serif);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md);
+  background-color: var(--background-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow-md);
+}
+
+.recipe-title {
+  font-size: var(--font-size-xxl);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.recipe-image {
+  width: calc(var(--spacing-md) * 10);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.recipe-instructions-title {
+  font-size: var(--font-size-xl);
+  color: var(--secondary-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.recipe-instructions {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-md);
+}
+
+.recipe-cooking-time {
+  font-size: var(--font-size-base);
+  color: var(--primary-color);
+  margin-top: var(--spacing-md);
+}
+
+.loading {
+  font-size: var(--font-size-base);
+  color: var(--primary-color);
+  text-align: center;
+  padding: var(--spacing-md);
+}

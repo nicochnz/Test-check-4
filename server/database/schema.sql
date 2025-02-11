@@ -1,21 +1,30 @@
-create table user (
-  id int unsigned primary key auto_increment not null,
-  email varchar(255) not null unique,
-  password varchar(255) not null
+USE cuisine;
+CREATE TABLE ingredients (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE
 );
 
-create table item (
-  id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
-  user_id int unsigned not null,
-  foreign key(user_id) references user(id)
+CREATE TABLE recipes (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    instructions TEXT NOT NULL,
+    cooking_time INT UNSIGNED NOT NULL,
+    servings INT UNSIGNED NOT NULL 
 );
 
-insert into user(id, email, password)
-values
-  (1, "jdoe@mail.com", "123456");
+CREATE TABLE recipe_ingredients (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    recipe_id INT UNSIGNED NOT NULL,
+    ingredient_id INT UNSIGNED NOT NULL,
+    quantity VARCHAR(50) NOT NULL,
+    FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE,
+    FOREIGN KEY (ingredient_id) REFERENCES ingredients(id) ON DELETE CASCADE
+);
 
-insert into item(id, title, user_id)
-values
-  (1, "Stuff", 1),
-  (2, "Doodads", 1);
+CREATE TABLE favorites (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    session_id VARCHAR(50) NOT NULL, 
+    recipe_id INT UNSIGNED NOT NULL,
+    FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
+);
