@@ -1,4 +1,4 @@
-@import url("../variable.css");
+@import url("../../variable.css");
 .home-section {
   display: flex;
   flex-direction: column;

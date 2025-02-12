@@ -1,5 +1,5 @@
 import DOMPurify from "dompurify";
-import { useRecipePageLogic } from "../services/RecipePageLogic";
+import { useRecipePageLogic } from "../../services/RecipePageLogic";
 import "./Recipe.css";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,7 @@ export default function Recipes() {
     <section className="recipe-section">
       <h1 className="recipe-title">{recipe.title}</h1>
       <img src={recipe.image} alt={recipe.title} className="recipe-image" />
-      <h2 className="recipe-instructions-title">Instructions :</h2>
+      <h2 className="recipe-instructions-title">Description :</h2>
       {/* biome-ignore lint/style/useSelfClosingElements: <explanation> */}
       <p
         className="recipe-instructions"

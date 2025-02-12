@@ -1,35 +1,38 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useHomePageLogic } from "../services/HomePageLogic";
 
-export default function Favorites() {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const favorites: any[] = JSON.parse(
-    localStorage.getItem("favorites") || "[]",
-  );
-  const navigate = useNavigate();
+export default function FavoritesPage() {
+  const { favorites } = useHomePageLogic(); // Récupérer les favoris
+
+  const clearFavorites = () => {
+    localStorage.removeItem("favorites"); // Effacer les favoris du localStorage
+    // Vous pouvez aussi appeler une fonction pour mettre à jour l'état de vos favoris ici
+    // Si vous avez un gestionnaire d'état dans useHomePageLogic, vous pouvez le déclencher.
+  };
+
   return (
     <section>
-      <h1>Recettes Favoris</h1>
-      {favorites.length === 0 ? (
-        <p>Aucune recette en favoris.</p>
-      ) : (
-        <article>
-          {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
-          {favorites.map((recipe: any) => (
-            <div key={recipe.id}>
-              <h3>{recipe.title}</h3>
+      <h1>Favorites</h1>
+      <button type="button" onClick={clearFavorites}>
+        Clear Favorites
+      </button>
+      <div className="favorites-grid">
+        {favorites.length === 0 ? (
+          <p>No favorites yet!</p>
+        ) : (
+          favorites.map((recipe, index) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+            <div key={index} className="recipe-card">
+              <h3>{recipe.title || recipe.name}</h3>
               <img
                 src={recipe.image}
-                alt={recipe.title}
-                style={{ width: "150px", borderRadius: "8px" }}
+                alt={recipe.title || recipe.name}
+                style={{ width: "200px", borderRadius: "8px" }}
               />
-              <Link to={`/recipe/${recipe.id}`}>Voir la recette</Link>
+              <p>{recipe.summary || recipe.description}</p>
             </div>
-          ))}
-        </article>
-      )}
-      <button type="button" onClick={() => navigate("/")}>
-        Return home
-      </button>
+          ))
+        )}
+      </div>
     </section>
   );
 }

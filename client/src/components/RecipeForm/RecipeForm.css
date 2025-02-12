@@ -1,0 +1,25 @@
+@import url("../../variable.css");
+.recipe-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-md);
+}
+.label-recipe-form {
+  font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-sm);
+}
+.ingredients-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+.ingredients-section input {
+  padding: var(--spacing-sm);
+  font-size: var(--font-size-base);
+  border: var(--border-radius-sm) solid #ccc;
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-sm);
+  width: calc(var(--spacing-md) * 10);
+}

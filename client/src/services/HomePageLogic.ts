@@ -1,54 +1,100 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Recipe } from "../types/types";
+
 export const useHomePageLogic = () => {
-  const [query, setQuery] = useState<string>("");
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  // Gérer les favoris avec localStorage
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  const [favorites, setFavorites] = useState<any[]>([]);
+  const [querySpoonacular, setQuerySpoonacular] = useState<string>("");
+  const [queryUserRecipes, setQueryUserRecipes] = useState<string>("");
+  const [recipesSpoonacular, setRecipesSpoonacular] = useState<Recipe[]>([]);
+  const [recipesUser, setRecipesUser] = useState<Recipe[]>([]);
+  const [loadingSpoonacular, setLoadingSpoonacular] = useState<boolean>(false);
+  const [errorSpoonacular, setErrorSpoonacular] = useState<string>("");
   const navigate = useNavigate();
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
+  // Récupérer les favoris depuis localStorage
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem("favorites");
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
+  }, []);
 
+  // Sauvegarder les favoris dans le localStorage lorsque l'état change
+  useEffect(() => {
+    if (favorites.length > 0) {
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+  }, [favorites]);
+
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  const handleAddToFavorites = (recipe: any) => {
+    setFavorites((prevFavorites) => [...prevFavorites, recipe]);
+  };
+
+  const fetchUserRecipes = async () => {
+    try {
+      const response = await fetch("http://localhost:3310/api/recipes");
+      const data = await response.json();
+      if (response.ok) {
+        setRecipesUser(data);
+      }
+    } catch (err) {
+      console.error(
+        "Erreur lors de la récupération des recettes utilisateurs:",
+        err,
+      );
+    }
+  };
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    fetchUserRecipes();
+  }, []);
+
+  const handleSearchSpoonacular = async (query: string) => {
+    setLoadingSpoonacular(true);
     try {
       const response = await fetch(
         `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=c5f23b5005084a988447182e2f2140bd`,
       );
       const data = await response.json();
-
       if (response.ok) {
-        setRecipes(data.results);
+        setRecipesSpoonacular(data.results);
       } else {
-        setError("Aucune recette trouvée.");
+        setErrorSpoonacular("No results found from Spoonacular.");
       }
     } catch (err) {
-      setError("Une erreur est survenue.");
+      setErrorSpoonacular("Error fetching Spoonacular data.");
     } finally {
-      setLoading(false);
+      setLoadingSpoonacular(false);
     }
   };
 
-  const handleAddToFavorites = (recipe: Recipe) => {
-    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-    if (!favorites.some((fav: Recipe) => fav.id === recipe.id)) {
-      favorites.push(recipe);
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-    }
+  const handleSearchUserRecipes = (query: string) => {
+    const filteredUserRecipes = recipesUser.filter(
+      (recipe) =>
+        recipe.name.toLowerCase().includes(query.toLowerCase()) ||
+        recipe.description.toLowerCase().includes(query.toLowerCase()),
+    );
+    setRecipesSpoonacular(filteredUserRecipes);
   };
+
   return {
-    query,
-    setQuery,
-    recipes,
-    setRecipes,
-    loading,
-    setLoading,
-    error,
-    setError,
-    navigate,
-    handleSearch,
+    favorites,
+    querySpoonacular,
+    setQuerySpoonacular,
+    recipesSpoonacular,
+    loadingSpoonacular,
+    errorSpoonacular,
+    handleSearchSpoonacular,
+    queryUserRecipes,
+    setQueryUserRecipes,
+    recipesUser,
+    handleSearchUserRecipes,
     handleAddToFavorites,
+    navigate,
   };
 };
