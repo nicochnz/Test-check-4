@@ -1,45 +1,11 @@
-import { useEffect, useState } from "react";
 import "./CarouselRecipes.css";
-import { useNavigate } from "react-router-dom";
-
-interface Recipe {
-  id: number;
-  title: string;
-  image: string;
-  sourceUrl: string;
-}
-
+import { useCarouselLogic } from "../../services/CarouselLogic";
 export default function CarouselRecipes() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [imgIndex, setImgIndex] = useState<number>(0);
-  const navigate = useNavigate();
-  const handleRecipeClick = (recipeId: number) => {
-    navigate(`/recipe/${recipeId}`); // Utilise navigate pour aller à la page de recette
-  };
-  useEffect(() => {
-    fetch(
-      "https://api.spoonacular.com/recipes/random?number=5&apiKey=c5f23b5005084a988447182e2f2140bd",
-    )
-      .then((response) => response.json())
-      .then((data) => setRecipes(data.recipes))
-      .catch((error) =>
-        console.error("Erreur lors de la récupération des recettes", error),
-      );
-  }, []);
-
-  const goToNext = () => {
-    setImgIndex((prevIndex) => (prevIndex + 1) % recipes.length);
-  };
-
-  const goToPrev = () => {
-    setImgIndex((prevIndex) =>
-      prevIndex === 0 ? recipes.length - 1 : prevIndex - 1,
-    );
-  };
-
+  const { recipes, imgIndex, goToNext, goToPrev, handleRecipeClick } =
+    useCarouselLogic();
   return (
     <div className="carouselContainer">
-      <h2 className="title">Recettes aléatoires</h2>
+      <h2 className="title">Random meal</h2>
 
       <div className="carousel-content">
         {recipes.length > 0 && (
@@ -49,7 +15,18 @@ export default function CarouselRecipes() {
               onClick={goToPrev}
               className="carousel-button prev"
             >
-              {"<"}
+              {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
             </button>
 
             <div className="carousel-image-container">
@@ -61,10 +38,10 @@ export default function CarouselRecipes() {
               <h3 className="recipeTitle">{recipes[imgIndex].title}</h3>
               <button
                 type="button"
-                onClick={() => handleRecipeClick(recipes[imgIndex].id)} // Utilise la fonction handleRecipeClick
+                onClick={() => handleRecipeClick(recipes[imgIndex].id)}
                 className="button"
               >
-                Voir la recette
+                Show recipe
               </button>
             </div>
 
@@ -73,7 +50,18 @@ export default function CarouselRecipes() {
               onClick={goToNext}
               className="carousel-button next"
             >
-              {">"}
+              {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
             </button>
           </>
         )}

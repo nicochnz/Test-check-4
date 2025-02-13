@@ -86,7 +86,7 @@ class RecipeRepository {
   }
 
   async fetchFromSpoonacular(query: string) {
-    const apiKey = "c5f23b5005084a988447182e2f2140bd";
+    const apiKey = "070d351c3e8b449b97fcd87bb52f1c24 ";
     const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${query}`;
 
     try {
@@ -101,6 +101,30 @@ class RecipeRepository {
     } catch (err: unknown) {
       const error = err as Error;
       throw new Error(`Error in fetchFromSpoonacular: ${error.message}`);
+    }
+  }
+  async delete(id: number) {
+    const connection = await databaseClient.getConnection();
+    try {
+      await connection.beginTransaction();
+
+      await connection.query(
+        "DELETE FROM recipe_ingredients WHERE recipe_id = ?",
+        [id],
+      );
+
+      const [result] = await connection.query<Result>(
+        "DELETE FROM recipes WHERE id = ?",
+        [id],
+      );
+
+      await connection.commit();
+      return result.affectedRows > 0;
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
     }
   }
 }

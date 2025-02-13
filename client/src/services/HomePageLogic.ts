@@ -58,7 +58,7 @@ export const useHomePageLogic = () => {
     setLoadingSpoonacular(true);
     try {
       const response = await fetch(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=c5f23b5005084a988447182e2f2140bd`,
+        `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=070d351c3e8b449b97fcd87bb52f1c24 `,
       );
       const data = await response.json();
       if (response.ok) {
@@ -84,6 +84,7 @@ export const useHomePageLogic = () => {
 
   return {
     favorites,
+    setFavorites,
     querySpoonacular,
     setQuerySpoonacular,
     recipesSpoonacular,

@@ -1,38 +1,68 @@
 import { useHomePageLogic } from "../services/HomePageLogic";
+import "./FavoriteComponent.css";
+import { useNavigate } from "react-router-dom";
 
 export default function FavoritesPage() {
-  const { favorites } = useHomePageLogic(); // Récupérer les favoris
+  const { favorites, setFavorites } = useHomePageLogic();
+  const navigate = useNavigate();
 
   const clearFavorites = () => {
-    localStorage.removeItem("favorites"); // Effacer les favoris du localStorage
-    // Vous pouvez aussi appeler une fonction pour mettre à jour l'état de vos favoris ici
-    // Si vous avez un gestionnaire d'état dans useHomePageLogic, vous pouvez le déclencher.
+    localStorage.removeItem("favorites");
+    setFavorites([]);
+  };
+
+  const removeFavorite = (index) => {
+    const updatedFavorites = favorites.filter((_, i) => i !== index);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    setFavorites(updatedFavorites);
+  };
+
+  const handleRecipeClick = (recipeId: number) => {
+    navigate(`/recipe/${recipeId}`);
   };
 
   return (
-    <section>
-      <h1>Favorites</h1>
-      <button type="button" onClick={clearFavorites}>
-        Clear Favorites
-      </button>
-      <div className="favorites-grid">
-        {favorites.length === 0 ? (
-          <p>No favorites yet!</p>
-        ) : (
-          favorites.map((recipe, index) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-            <div key={index} className="recipe-card">
-              <h3>{recipe.title || recipe.name}</h3>
-              <img
-                src={recipe.image}
-                alt={recipe.title || recipe.name}
-                style={{ width: "200px", borderRadius: "8px" }}
-              />
-              <p>{recipe.summary || recipe.description}</p>
-            </div>
-          ))
-        )}
-      </div>
-    </section>
+    <div className="favorites-container">
+      <section className="favorites-section">
+        <h1 className="favorites-title">Favorites</h1>
+        <button
+          type="button"
+          onClick={clearFavorites}
+          className="clear-favorites-btn"
+        >
+          Clear Favorites
+        </button>
+        <div className="favorites-grid">
+          {favorites.length === 0 ? (
+            <p className="no-favorites-message">No favorites yet!</p>
+          ) : (
+            favorites.map((recipe, index) => (
+              <div key={index} className="recipe-card-favorite">
+                <h3 className="recipe-title">{recipe.title || recipe.name}</h3>
+                <img
+                  src={recipe.image}
+                  alt={recipe.title || recipe.name}
+                  className="recipe-image"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRecipeClick(recipe.id)}
+                  className="button"
+                >
+                  Show recipe
+                </button>
+                <button
+                  type="button"
+                  onClick={() => removeFavorite(index)}
+                  className="remove-favorite-button"
+                >
+                  <i className="fas fa-times" />
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      </section>
+    </div>
   );
 }

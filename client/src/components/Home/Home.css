@@ -1,7 +1,7 @@
 @import url("../../variable.css");
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: lobster, cursive;
   background-color: #f8f5f2;
   color: #333;
   margin: 0;
@@ -18,7 +18,7 @@ body {
 }
 
 .title-home {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: var(--spacing-md);
   color: #c47c44;
@@ -62,7 +62,6 @@ body {
   border-radius: var(--border-radius-md);
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  text-transform: uppercase;
 }
 
 .button-home:hover {
@@ -73,10 +72,11 @@ body {
 .recipes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
+  gap: 5rem;
+  padding: 2rem;
   width: 100%;
   max-width: 1200px;
+  justify-items: center;
 }
 
 .recipe-card {
@@ -91,6 +91,8 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 400px;
+
+  width: 100%;
 }
 
 .recipe-card:hover {
@@ -154,4 +156,17 @@ body {
 .fav-popup.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .recipes-grid {
+    grid-template-columns: 1fr;
+    padding: 0;
+    justify-items: center;
+  }
+
+  .recipe-card {
+    width: 90%;
+    margin: auto;
+  }
 }

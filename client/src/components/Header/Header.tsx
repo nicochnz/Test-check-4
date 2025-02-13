@@ -1,4 +1,5 @@
-import "./Header.css"; // Fichier CSS pour le Header
+import { Link } from "react-router-dom";
+import "./Header.css";
 
 export default function Header() {
   return (
@@ -6,12 +7,15 @@ export default function Header() {
       <div className="header-content">
         <h1 className="header-title">Spoonacular</h1>
         <nav className="header-nav">
-          <button type="button" className="nav-button home-button">
+          <Link to="/" className="nav-button home-button">
             <i className="fas fa-home" /> Home
-          </button>
-          <button type="button" className="nav-button favorites-button">
+          </Link>
+          <Link to="/favorites" className="nav-button favorites-button">
             <i className="fas fa-heart" /> Favorites
-          </button>
+          </Link>
+          <Link to="/recipeform" className="nav-button create-recipe-button">
+            <i className="fas fa-plus" /> Create Recipe
+          </Link>
         </nav>
       </div>
     </header>

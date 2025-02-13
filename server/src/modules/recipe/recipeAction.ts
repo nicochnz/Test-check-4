@@ -1,9 +1,6 @@
 import { log } from "node:console";
 import type { RequestHandler } from "express";
-import multer from "multer";
 import recipeRepository from "./recipeRepository";
-
-const upload = multer({ dest: "uploads/" });
 
 const browse: RequestHandler = async (req, res, next) => {
   try {
@@ -38,9 +35,8 @@ const add: RequestHandler = async (req, res, next) => {
       cooking_time: Number(req.body.cooking_time),
       servings: Number(req.body.servings),
       user_id: Number(req.body.user_id),
-      image: req.body.image ? "toto" : "tata", // Vérification de l'image
+      image: req.file ? req.file.filename : undefined,
     };
-    console.log(req.file);
 
     // Gestion des ingrédients
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -71,5 +67,19 @@ const browseFromSpoonacular: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+const remove: RequestHandler = async (req, res, next) => {
+  try {
+    const recipeId = Number(req.params.id);
+    const deleted = await recipeRepository.delete(recipeId);
 
-export default { browse, read, add, browseFromSpoonacular };
+    if (!deleted) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, read, add, browseFromSpoonacular, remove };

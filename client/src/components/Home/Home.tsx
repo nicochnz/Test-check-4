@@ -52,17 +52,8 @@ export default function Home() {
 
   return (
     <section className="home-section">
-      <button
-        type="button"
-        className="button-home"
-        onClick={() => navigate("/favorites")}
-      >
-        Go to Favorites
-      </button>
-
       <h1 className="title-home">Find recipes</h1>
 
-      {/* Recherche Spoonacular */}
       <form className="form-home" onSubmit={handleSubmitSpoonacular}>
         <input
           type="text"
@@ -79,7 +70,6 @@ export default function Home() {
         </button>
       </form>
 
-      {/* Recherche Recettes Utilisateurs */}
       <form className="form-home" onSubmit={handleSubmitUserRecipes}>
         <input
           type="text"
@@ -92,10 +82,8 @@ export default function Home() {
         </button>
       </form>
 
-      {/* Affichage des erreurs */}
       {errorSpoonacular && <p style={{ color: "red" }}>{errorSpoonacular}</p>}
 
-      {/* Affichage des résultats Spoonacular */}
       {recipesSpoonacular.length > 0 && (
         <article>
           <h2 className="title-home">Search result :</h2>
@@ -136,7 +124,7 @@ export default function Home() {
               <div key={recipe.id} className="recipe-card">
                 <h3>{recipe.name}</h3>
                 <img
-                  src={recipe.image}
+                  src={`${import.meta.env.VITE_API_URL}/uploads/${recipe.image}`}
                   alt={recipe.name}
                   style={{ width: "200px", borderRadius: "8px" }}
                 />

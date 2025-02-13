@@ -50,10 +50,7 @@ export default function RecipeForm() {
       <article className="ingredients-section">
         <label htmlFor="ingredients">Ingrédients :</label>
         {formData.ingredients.map((ingredient, index) => (
-          <div
-            key={`ingredient-${ingredient.name || index}-${Date.now()}`}
-            className="ingredient-item"
-          >
+          <div key={`ingredient-${index}`} className="ingredient-item">
             <input
               id={`ingredient-name-${index}`}
               type="text"
@@ -83,7 +80,12 @@ export default function RecipeForm() {
             </button>
           </div>
         ))}
-        <button type="button" onClick={addIngredient} className="add-button">
+
+        <button
+          type="button"
+          onClick={addIngredient}
+          className="add-button-recipe-form"
+        >
           Add ingredient
         </button>
       </article>
@@ -98,7 +100,7 @@ export default function RecipeForm() {
         />
       </label>
 
-      <button type="submit" className="submit-button">
+      <button type="submit" className="submit-button-recipe-form">
         Add recipe
       </button>
     </form>

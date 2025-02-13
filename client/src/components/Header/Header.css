@@ -56,7 +56,15 @@
   position: relative;
   z-index: 2; /* Pour que le texte soit au-dessus de l'image de fond */
 }
-
+.nav-button.favorites-button {
+  text-decoration: none; /* Enlève le soulignement */
+}
+.nav-button.create-recipe-button {
+  text-decoration: none; /* Enlève le soulignement */
+}
+.nav-button.home-button {
+  text-decoration: none; /* Enlève le soulignement */
+}
 @media (max-width: 768px) {
   .header-title {
     font-size: 2rem;
@@ -64,6 +72,8 @@
 
   .header-nav {
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 15px;
   }
 }

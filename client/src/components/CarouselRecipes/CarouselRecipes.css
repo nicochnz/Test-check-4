@@ -1,3 +1,5 @@
+@import url("../../variable.css");
+
 .carouselContainer {
   display: flex;
   flex-direction: column;
@@ -6,11 +8,18 @@
   max-width: 800px;
   margin: auto;
   position: relative;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 20px;
+  font-family: "Lobster", cursive;
+  color: var(--primary-color);
+  text-align: center;
 }
 
 .carousel-content {
@@ -19,6 +28,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  border-radius: 15px;
 }
 
 .carousel-image-container {
@@ -29,61 +40,115 @@
 
 .carousel-image {
   width: 100%;
-  height: 300px; /* Ajustez la taille en fonction de vos besoins */
+  height: 400px; /* Ajustez la taille des images */
   object-fit: cover;
-  border-radius: 10px;
-  border: solid 2px black;
+  border-radius: 15px;
+  border: 5px solid #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .recipeTitle {
-  font-size: 1.2rem;
-  margin-top: 10px;
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 600;
+  margin-top: 15px;
 }
 
 .button {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #007bff;
+  margin-top: 15px;
+  padding: 12px 25px;
+  background-color: #c47c44;
   color: white;
   text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.3s ease;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #a56736;
+  transform: translateY(-3px);
 }
-
 .carousel-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6); /* Changer l'opacité pour mieux les voir */
   color: white;
   border: none;
   font-size: 2rem;
-  padding: 10px 20px;
+  padding: 12px;
   cursor: pointer;
   border-radius: 50%;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  z-index: 2; /* S'assurer que les flèches sont au-dessus des images */
 }
 
 .carousel-button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  transform: scale(1.2); /* Légère agrandissement lors du survol */
+  background-color: rgba(0, 0, 0, 0.8); /* Un peu plus sombre au survol */
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .prev {
-  left: -40px; /* Déplace la flèche vers la gauche, en dehors de l'image */
+  left: 10px; /* Décalage des flèches à gauche */
 }
 
 .next {
-  right: -40px; /* Déplace la flèche vers la droite, en dehors de l'image */
+  right: 10px; /* Décalage des flèches à droite */
+}
+
+.carousel-button svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  transition: transform 0.3s ease;
+}
+
+.carousel-button.next:hover svg {
+  transform: translateX(5px);
+}
+
+.carousel-button.prev:hover svg {
+  transform: translateX(-5px);
 }
 
 @media (max-width: 768px) {
+  .carousel-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
   .carousel-button {
     font-size: 1.5rem;
-    padding: 8px 16px;
+    padding: 10px;
+  }
+
+  .carousel-image {
+    height: 250px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  .carousel-button.prev {
+    top: 350px;
+  }
+  .carousel-button.next {
+    top: 350px;
   }
 }

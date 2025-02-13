@@ -23,9 +23,33 @@ const router = createBrowserRouter([
           </>
         ),
       },
-      { path: "/recipe/:id", element: <RecipePage /> },
-      { path: "/favorites", element: <FavoritesPage /> },
-      { path: "/recipeform", element: <RecipeForm /> },
+      {
+        path: "/recipe/:id",
+        element: (
+          <>
+            {" "}
+            <Header />
+            <RecipePage />{" "}
+          </>
+        ),
+      },
+      {
+        path: "/favorites",
+        element: (
+          <>
+            {" "}
+            <Header /> <FavoritesPage />{" "}
+          </>
+        ),
+      },
+      {
+        path: "/recipeform",
+        element: (
+          <>
+            <Header /> <RecipeForm />{" "}
+          </>
+        ),
+      },
     ],
   },
 ]);
