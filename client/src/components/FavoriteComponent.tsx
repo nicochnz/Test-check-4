@@ -11,7 +11,7 @@ export default function FavoritesPage() {
     setFavorites([]);
   };
 
-  const removeFavorite = (index) => {
+  const removeFavorite = (index: number) => {
     const updatedFavorites = favorites.filter((_, i) => i !== index);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     setFavorites(updatedFavorites);

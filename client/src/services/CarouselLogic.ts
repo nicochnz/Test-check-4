@@ -11,7 +11,7 @@ interface Recipe {
 export const useCarouselLogic = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [imgIndex, setImgIndex] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [_, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   const handleRecipeClick = (recipeId: number) => {
