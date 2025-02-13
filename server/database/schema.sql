@@ -22,7 +22,8 @@ CREATE TABLE recipes (
     description TEXT NOT NULL,
     instructions TEXT NOT NULL,
     cooking_time INT UNSIGNED NOT NULL,
-    servings INT UNSIGNED NOT NULL
+    servings INT UNSIGNED NOT NULL,
+    image VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE recipe_ingredients (

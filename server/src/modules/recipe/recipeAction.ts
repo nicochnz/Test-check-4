@@ -38,8 +38,9 @@ const add: RequestHandler = async (req, res, next) => {
       cooking_time: Number(req.body.cooking_time),
       servings: Number(req.body.servings),
       user_id: Number(req.body.user_id),
-      image: req.file ? req.file.path : null, // Vérification de l'image
+      image: req.body.image ? "toto" : "tata", // Vérification de l'image
     };
+    console.log(req.file);
 
     // Gestion des ingrédients
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>

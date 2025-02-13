@@ -1,95 +1,157 @@
 @import url("../../variable.css");
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f5f2;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
 .home-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: var(--spacing-md);
+  max-width: 1200px;
+  margin: auto;
 }
 
 .title-home {
-  font-size: var(--font-size-xxl);
+  font-size: 2.5rem;
+  font-weight: bold;
   margin-bottom: var(--spacing-md);
+  color: #c47c44;
+  text-align: center;
 }
 
 .form-home {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #fff;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: var(--spacing-md);
+  width: 90%;
+  max-width: 500px;
 }
 
 .form-home input {
-  padding: var(--spacing-md);
-  font-size: var(--font-size-base);
-  border: var(--border-radius-sm) solid #ccc;
+  padding: var(--spacing-sm);
+  font-size: 1rem;
+  border: 2px solid #e0c2a2;
   border-radius: var(--border-radius-md);
+  width: 100%;
   margin-bottom: var(--spacing-sm);
-  width: calc(var(--spacing-md) * 10);
 }
 
 .form-home input:focus {
-  border-color: var(--primary-color);
+  border-color: #c47c44;
   outline: none;
 }
 
 .button-home {
   padding: var(--spacing-sm) var(--spacing-md);
-  font-size: var(--font-size-base);
+  font-size: 1rem;
+  font-weight: bold;
   color: #fff;
-  background-color: var(--primary-color);
+  background-color: #c47c44;
   border: none;
   border-radius: var(--border-radius-md);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-transform: uppercase;
 }
 
 .button-home:hover {
-  background-color: #0056b3;
+  background-color: #a56736;
+  transform: scale(1.05);
 }
 
-article {
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
 }
 
-article h2 {
-  font-size: 1.5em;
-  margin-bottom: 20px;
-}
-
-article div {
+.recipe-card {
+  background: #fff;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: var(--spacing-md);
+  transition: transform 0.2s ease-in-out;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 400px;
 }
 
-article div > div {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.recipe-card:hover {
+  transform: scale(1.03);
+}
+
+.recipe-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-sm);
+  color: #c47c44;
+}
+
+.recipe-card img {
   width: 100%;
-  max-width: 600px;
-  margin-bottom: 20px;
-  text-align: center;
+  border-radius: var(--border-radius-md);
+  max-height: 200px;
+  object-fit: cover;
 }
 
-article div img {
-  margin-bottom: 10px;
+.recipe-card p {
+  font-size: 0.9rem;
+  color: #555;
+  padding: var(--spacing-sm);
+  flex-grow: 1;
 }
 
-article div button {
-  padding: 10px 20px;
-  font-size: 1em;
+.recipe-card button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
   color: #fff;
-  background-color: #28a745;
+  background-color: #c47c44;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: var(--spacing-sm);
+  text-transform: uppercase;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-article div button:hover {
-  background-color: #218838;
+.recipe-card button:hover {
+  background-color: #a56736;
+  transform: scale(1.05);
+}
+
+.fav-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #c47c44;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fav-popup.show {
+  opacity: 1;
+  transform: translateY(0);
 }

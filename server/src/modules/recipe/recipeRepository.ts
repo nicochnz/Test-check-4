@@ -9,6 +9,7 @@ type Recipe = {
   cooking_time: number;
   servings: number;
   user_id?: number;
+  image?: string;
 };
 
 type Ingredient = {
@@ -28,8 +29,8 @@ class RecipeRepository {
 
       // Insertion de la recette
       const [recipeResult] = await connection.query<Result>(
-        `INSERT INTO recipes (name, description, instructions, cooking_time, servings, user_id) 
-         VALUES (?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO recipes (name, description, instructions, cooking_time, servings, user_id, image) 
+         VALUES (?, ?, ?, ?, ?, ?, ?)`,
         [
           recipe.name,
           recipe.description,
@@ -37,6 +38,7 @@ class RecipeRepository {
           recipe.cooking_time,
           recipe.servings,
           recipe.user_id,
+          recipe.image,
         ],
       );
 
