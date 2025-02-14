@@ -1,0 +1,79 @@
+/* Styles pour le Header */
+.header {
+  background-image: url("/src/assets/images/Girl-kitchen.jpg"); /* Remplace cette URL par l'image de fond de ton choix */
+  background-size: cover;
+  background-position: center;
+  padding: 40px 0;
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+.header-title {
+  font-size: 3rem;
+  font-family: "Lobster", cursive;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.header-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.nav-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.home-button {
+  background-color: #c47c44;
+}
+
+.favorites-button {
+  background-color: rgba(255, 0, 0, 0.7); /* Un rouge chaleureux pour les Favoris */
+}
+
+.nav-button i {
+  font-size: 1.5rem;
+}
+
+.header-content {
+  position: relative;
+  z-index: 2; /* Pour que le texte soit au-dessus de l'image de fond */
+}
+.nav-button.favorites-button {
+  text-decoration: none; /* Enlève le soulignement */
+}
+.nav-button.create-recipe-button {
+  text-decoration: none; /* Enlève le soulignement */
+}
+.nav-button.home-button {
+  text-decoration: none; /* Enlève le soulignement */
+}
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 2rem;
+  }
+
+  .header-nav {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+}

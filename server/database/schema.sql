@@ -1,21 +1,47 @@
-create table user (
-  id int unsigned primary key auto_increment not null,
-  email varchar(255) not null unique,
-  password varchar(255) not null
+USE cuisine;
+CREATE TABLE users (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
 );
 
-create table item (
-  id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
-  user_id int unsigned not null,
-  foreign key(user_id) references user(id)
+CREATE TABLE ingredients (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    quantity INT NOT NULL
+);
+CREATE TABLE category (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE
 );
 
-insert into user(id, email, password)
-values
-  (1, "jdoe@mail.com", "123456");
+CREATE TABLE recipes (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    instructions TEXT NOT NULL,
+    cooking_time INT UNSIGNED NOT NULL,
+    servings INT UNSIGNED NOT NULL,
+    image VARCHAR(255) NOT NULL
+);
 
-insert into item(id, title, user_id)
-values
-  (1, "Stuff", 1),
-  (2, "Doodads", 1);
+CREATE TABLE recipe_ingredients (
+    recipe_id INT UNSIGNED NOT NULL,
+    ingredients_id INT UNSIGNED NOT NULL,
+    quantity INT NOT NULL,
+    PRIMARY KEY (recipe_id, ingredients_id),
+    FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE,
+    FOREIGN KEY (ingredients_id) REFERENCES ingredients(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE favorites (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    users_id INT UNSIGNED NOT NULL, 
+    recipe_id INT UNSIGNED NOT NULL,
+    FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
+);
+
+ALTER TABLE recipes ADD COLUMN user_id INT UNSIGNED NULL;
+ALTER TABLE recipes ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL;

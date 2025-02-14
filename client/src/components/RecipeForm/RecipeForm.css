@@ -1,0 +1,184 @@
+.recipe-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #4e4e4e;
+  font-family: "Lobster", cursive;
+}
+
+.label-recipe-form {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 10px;
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #555;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+  border-color: #c47c44;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  height: 150px;
+}
+
+/* Boutons */
+.recipe-form__button {
+  background-color: #c47c44;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.recipe-form__button:hover {
+  background-color: #a56736;
+  transform: translateY(-2px);
+}
+
+.recipe-form__button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Bouton de suppression des ingrédients */
+.delete-button-recipe-form {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+}
+
+.delete-button-recipe-form:hover {
+  background-color: #ff1a1a;
+}
+
+/* Section des ingrédients */
+.ingredients-section {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.ingredient-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.ingredient-item input {
+  width: 45%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+}
+
+.ingredient-item input:focus {
+  border-color: #c47c44;
+}
+
+.add-button-recipe-form {
+  background-color: #4caf50;
+  color: white;
+  font-size: 1rem;
+  padding: 12px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: none;
+}
+
+.add-button-recipe-form:hover {
+  background-color: #45a049;
+}
+
+/* Position des boutons dans le formulaire */
+.submit-button-recipe-form {
+  width: 100%;
+  background-color: #c47c44;
+  color: white;
+  padding: 14px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-top: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button-recipe-form:hover {
+  background-color: #a56736;
+  transform: translateY(-2px);
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+  .recipe-form {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .ingredient-item input {
+    width: 40%;
+  }
+
+  .submit-button-recipe-form {
+    font-size: 1rem;
+  }
+
+  .recipe-form__button {
+    font-size: 1rem;
+  }
+
+  .add-button-recipe-form,
+  .delete-button-recipe-form {
+    padding: 8px 16px;
+  }
+}

@@ -1,18 +1,12 @@
 import express from "express";
-
+import recipeAction from "./modules/recipe/recipeAction";
+import upload from "./upload";
 const router = express.Router();
 
-/* ************************************************************************* */
-// Define Your API Routes Here
-/* ************************************************************************* */
+router.get("/api/recipes", recipeAction.browse);
+router.get("/api/recipes/:id", recipeAction.read);
+router.post("/api/recipes", upload.single("image"), recipeAction.add);
 
-// Define item-related routes
-import itemActions from "./modules/item/itemActions";
-
-router.get("/api/items", itemActions.browse);
-router.get("/api/items/:id", itemActions.read);
-router.post("/api/items", itemActions.add);
-
-/* ************************************************************************* */
+router.get("/api/recipes/search", recipeAction.browseFromSpoonacular);
 
 export default router;

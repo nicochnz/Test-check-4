@@ -3,7 +3,7 @@
 import express from "express";
 
 const app = express();
-
+app.use(express.json());
 // Configure it
 
 /* ************************************************************************* */
@@ -20,9 +20,13 @@ const app = express();
 
 import cors from "cors";
 
-if (process.env.CLIENT_URL != null) {
-  app.use(cors({ origin: [process.env.CLIENT_URL] }));
-}
+const corsOptions = {
+  origin: process.env.CLIENT_URL || "*", // Autorise l'URL du client si définie, sinon toutes les origines
+  methods: "GET,POST,PUT,DELETE", // Autorise les méthodes HTTP nécessaires
+  allowedHeaders: "Content-Type,Authorization", // Autorise les en-têtes nécessaires
+};
+
+app.use(cors(corsOptions));
 
 // If you need to allow extra origins, you can add something like this:
 
