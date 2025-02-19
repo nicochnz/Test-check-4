@@ -40,7 +40,11 @@ export default function FavoritesPage() {
               <div key={index} className="recipe-card-favorite">
                 <h3 className="recipe-title">{recipe.title || recipe.name}</h3>
                 <img
-                  src={recipe.image}
+                  src={
+                    recipe.image.startsWith("http")
+                      ? recipe.image
+                      : `${import.meta.env.VITE_API_URL}/uploads/${recipe.image}`
+                  }
                   alt={recipe.title || recipe.name}
                   className="recipe-image"
                 />

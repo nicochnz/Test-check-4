@@ -1,9 +1,10 @@
 // Load the express module to create a web application
 
 import express from "express";
-
+import authRoutes from "../service/auth";
 const app = express();
 app.use(express.json());
+app.use("/api/auth", authRoutes);
 // Configure it
 
 /* ************************************************************************* */

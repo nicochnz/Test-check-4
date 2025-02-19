@@ -90,7 +90,7 @@ export default function Home() {
           <div className="recipes-grid">
             {recipesSpoonacular.map((recipe) => (
               <div key={recipe.id} className="recipe-card">
-                <h3>{recipe.title}</h3>
+                <h3 className="">{recipe.title}</h3>
                 <img
                   src={recipe.image}
                   alt={recipe.title}
@@ -100,8 +100,9 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => navigate(`/recipe/${recipe.id}`)}
+                  className="button-home"
                 >
-                  More Information
+                  Show recipe
                 </button>
                 <button
                   type="button"

@@ -15,7 +15,7 @@ h2 {
   font-size: 2rem;
   margin-bottom: 20px;
   color: #4e4e4e;
-  font-family: "Lobster", cursive;
+  font-family: oswald, sans-serif;
 }
 
 .label-recipe-form {
@@ -57,7 +57,6 @@ textarea {
   height: 150px;
 }
 
-/* Boutons */
 .recipe-form__button {
   background-color: #c47c44;
   color: white;

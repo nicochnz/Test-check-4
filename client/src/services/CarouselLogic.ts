@@ -20,7 +20,7 @@ export const useCarouselLogic = () => {
 
   useEffect(() => {
     fetch(
-      "https://api.spoonacular.com/recipes/random?number=5&apiKey=070d351c3e8b449b97fcd87bb52f1c24",
+      "https://api.spoonacular.com/recipes/random?number=5&apiKey=f35c2233c4be4cc6b222f6cfec191abd",
     )
       .then((response) => response.json())
       .then((data) => {

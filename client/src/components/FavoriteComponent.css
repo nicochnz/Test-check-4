@@ -10,7 +10,7 @@
   padding: 20px;
   max-width: 1200px;
   width: 100%;
-  font-family: "Arial", sans-serif;
+  font-family: oswald, sans-serif;
 }
 
 .favorites-title {
@@ -58,7 +58,7 @@
   justify-content: space-between;
   height: 100%;
   transition: transform 0.3s ease;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: oswald, sans-serif;
 }
 
 .recipe-card-favorite img {

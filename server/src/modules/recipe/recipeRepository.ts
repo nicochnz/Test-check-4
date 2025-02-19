@@ -28,6 +28,8 @@ class RecipeRepository {
       await connection.beginTransaction();
 
       // Insertion de la recette
+      // [recipeResult] is a destructuring assignment that extracts the first element of the array returned by the query method.
+      // [resut]
       const [recipeResult] = await connection.query<Result>(
         `INSERT INTO recipes (name, description, instructions, cooking_time, servings, user_id, image) 
          VALUES (?, ?, ?, ?, ?, ?, ?)`,
