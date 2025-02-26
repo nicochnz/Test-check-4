@@ -1,5 +1,6 @@
 import { log } from "node:console";
 import type { RequestHandler } from "express";
+import categoryRepository from "../category/categoryRepository"; // Assure-toi que tu importes le repository pour gérer les catégories
 import recipeRepository from "./recipeRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -28,25 +29,65 @@ const read: RequestHandler = async (req, res, next) => {
 
 const add: RequestHandler = async (req, res, next) => {
   try {
+    const {
+      name,
+      description,
+      instructions,
+      cooking_time,
+      servings,
+      user_id,
+      category_id,
+      ingredients,
+    } = req.body;
+
+    if (
+      !name ||
+      !description ||
+      !instructions ||
+      !cooking_time ||
+      !servings ||
+      !user_id
+    ) {
+      res.status(400).json({
+        message: "Tous les champs obligatoires doivent être remplis.",
+      });
+      return;
+    }
+
+    if (category_id) {
+      const category = await categoryRepository.read(category_id);
+      if (!category) {
+        res
+          .status(400)
+          .json({ message: "La catégorie spécifiée n'existe pas." });
+        return;
+      }
+    }
+
     const newRecipe = {
-      name: req.body.name,
-      description: req.body.description,
-      instructions: req.body.instructions,
-      cooking_time: Number(req.body.cooking_time),
-      servings: Number(req.body.servings),
-      user_id: Number(req.body.user_id),
+      name,
+      description,
+      instructions,
+      cooking_time: Number(cooking_time),
+      servings: Number(servings),
+      user_id: Number(user_id),
+      category_id: category_id ? Number(category_id) : null,
       image: req.file ? req.file.filename : undefined,
     };
 
-    // Gestion des ingrédients
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    const ingredients = req.body.ingredients.map((ingredient: any) => ({
-      name: ingredient.name,
-      quantity: Number(ingredient.quantity),
-    }));
+    const formattedIngredients = Array.isArray(ingredients)
+      ? // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        ingredients.map((ingredient: any) => ({
+          name: ingredient.name,
+          quantity: Number(ingredient.quantity),
+        }))
+      : [];
 
-    // Transaction : création de la recette et insertion des ingrédients
-    const insertId = await recipeRepository.create(newRecipe, ingredients);
+    // Création de la recette et insertion des ingrédients
+    const insertId = await recipeRepository.create(
+      newRecipe,
+      formattedIngredients,
+    );
     res.status(201).json({ insertId });
   } catch (err) {
     next(err);
@@ -67,6 +108,7 @@ const browseFromSpoonacular: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+
 const remove: RequestHandler = async (req, res, next) => {
   try {
     const recipeId = Number(req.params.id);

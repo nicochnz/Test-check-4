@@ -10,6 +10,7 @@ type Recipe = {
   servings: number;
   user_id?: number;
   image?: string;
+  category_id: number | null;
 };
 
 type Ingredient = {
@@ -31,16 +32,17 @@ class RecipeRepository {
       // [recipeResult] is a destructuring assignment that extracts the first element of the array returned by the query method.
       // [resut]
       const [recipeResult] = await connection.query<Result>(
-        `INSERT INTO recipes (name, description, instructions, cooking_time, servings, user_id, image) 
-         VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO recipes (name, description, instructions, cooking_time, servings, image, category_id, user_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           recipe.name,
           recipe.description,
           recipe.instructions,
           recipe.cooking_time,
           recipe.servings,
-          recipe.user_id,
           recipe.image,
+          recipe.category_id,
+          recipe.user_id,
         ],
       );
 
@@ -88,7 +90,8 @@ class RecipeRepository {
   }
 
   async fetchFromSpoonacular(query: string) {
-    const apiKey = "070d351c3e8b449b97fcd87bb52f1c24 ";
+    const apiKey = process.env.SPOONACULAR_API_KEY;
+
     const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${query}`;
 
     try {

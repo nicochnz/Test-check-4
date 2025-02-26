@@ -1,14 +1,20 @@
 import DOMPurify from "dompurify";
+import { useNavigate } from "react-router-dom";
 import { useRecipePageLogic } from "../../services/RecipePageLogic";
 import "./Recipe.css";
-import { useNavigate } from "react-router-dom";
 
-export default function Recipes() {
-  const { recipe } = useRecipePageLogic();
+export default function RecipeComponent() {
   const navigate = useNavigate();
 
-  if (!recipe) {
-    return <div className="loading">Loading...</div>;
+  // Utilisation de la logique de recette
+  const { recipe, loading, error } = useRecipePageLogic();
+
+  if (loading) {
+    return <div className="loading">Chargement...</div>;
+  }
+
+  if (error) {
+    return <div className="loading">Recette introuvable.</div>;
   }
 
   const showFavPopup = () => {
@@ -22,6 +28,8 @@ export default function Recipes() {
   };
 
   const handleAddRecipeToFavorites = () => {
+    if (!recipe) return;
+
     const storedFavorites = localStorage.getItem("favorites");
     const favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
 
@@ -33,29 +41,44 @@ export default function Recipes() {
     }
   };
 
-  return (
+  return !recipe ? (
+    <div className="loading">Recette introuvable.</div>
+  ) : (
     <section className="recipe-section">
-      <h1 className="recipe-title">{recipe.title}</h1>
-      <img src={recipe.image} alt={recipe.title} className="recipe-image" />
-      <h2 className="recipe-instructions-title">Instruction :</h2>
-      {/* biome-ignore lint/style/useSelfClosingElements: <explanation> */}
-      <p
-        className="recipe-instructions"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-        dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(recipe.instructions),
-        }}
-      ></p>
-      <h3 className="recipe-cooking-time">
-        Cooking time: {recipe.readyInMinutes} minutes
-      </h3>
+      <h1 className="recipe-title">{recipe.title || recipe.name}</h1>
+      {recipe.image && (
+        <img
+          src={recipe.image}
+          alt={recipe.title || recipe.name}
+          className="recipe-image"
+        />
+      )}
+
+      {recipe.description && (
+        <p className="recipe-description">{recipe.description}</p>
+      )}
+
+      {recipe.instructions && (
+        <>
+          <h2 className="recipe-instructions-title">Instructions :</h2>
+          <div className="recipe-instructions">
+            {DOMPurify.sanitize(recipe.instructions).replace(/<[^>]*>/g, "")}
+          </div>
+        </>
+      )}
+
+      {recipe.readyInMinutes && (
+        <h3 className="recipe-cooking-time">
+          Temps de préparation : {recipe.readyInMinutes} minutes
+        </h3>
+      )}
 
       <button
         className="show-recipe-button"
         type="button"
         onClick={handleAddRecipeToFavorites}
       >
-        Add to Favorites
+        Ajouter aux favoris
       </button>
 
       <button
@@ -63,11 +86,10 @@ export default function Recipes() {
         type="button"
         onClick={() => navigate("/")}
       >
-        Return home
+        Retour à l'accueil
       </button>
 
-      {/* Popup de confirmation */}
-      <div className="fav-popup">Added to Favorites!</div>
+      <div className="fav-popup">Ajouté aux favoris !</div>
     </section>
   );
 }

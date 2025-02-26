@@ -10,6 +10,7 @@ export default function RecipeForm() {
     removeIngredient,
     handleSubmit,
     formData,
+    categories,
   } = useRecipeFormLogic();
 
   return (
@@ -47,10 +48,27 @@ export default function RecipeForm() {
         />
       </label>
 
+      <label className="label-recipe-form">
+        Category :
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select a category</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </label>
+
       <article className="ingredients-section">
         <label htmlFor="ingredients">Ingrédients :</label>
         {formData.ingredients.map((ingredient, index) => (
-          <div key={`ingredient-${index}`} className="ingredient-item">
+          <div key={ingredient.id} className="ingredient-item">
             <input
               id={`ingredient-name-${index}`}
               type="text"
