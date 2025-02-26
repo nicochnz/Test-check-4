@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import type { Key } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Déclare les types pour les ingrédients
 type Ingredient = {
-  id: null | undefined;
+  id: Key | null | undefined;
   name: string;
   quantity: string;
 };
@@ -128,7 +129,7 @@ export const useRecipeFormLogic = () => {
 
       const data = await response.json();
       alert("Recette créée avec succès !");
-      navigate(`/recipes/${data.recipeId}`);
+      navigate(`/recipe/${data.recipeId}`);
     } catch (error) {
       console.error("Erreur détaillée:", error);
       alert(
