@@ -15,7 +15,7 @@ export default function RecipeForm() {
 
   return (
     <form onSubmit={handleSubmit} className="recipe-form">
-      <h2>Create recipe :</h2>
+      <h2 className="title-recipe-form">Create recipe :</h2>
 
       <label className="label-recipe-form">
         Title :
@@ -28,7 +28,7 @@ export default function RecipeForm() {
         />
       </label>
 
-      <label>
+      <label className="label-recipe-form">
         Image :
         <input
           lang="en"
@@ -66,7 +66,9 @@ export default function RecipeForm() {
       </label>
 
       <article className="ingredients-section">
-        <label htmlFor="ingredients">Ingrédients :</label>
+        <label className="label-recipe-form" htmlFor="ingredients">
+          Ingrédients :
+        </label>
         {formData.ingredients.map((ingredient, index) => (
           <div key={ingredient.id} className="ingredient-item">
             <input
@@ -108,7 +110,7 @@ export default function RecipeForm() {
         </button>
       </article>
 
-      <label>
+      <label className="label-recipe-form">
         Instructions :
         <textarea
           name="instructions"

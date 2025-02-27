@@ -1,34 +1,33 @@
-/* Conteneur autour de la section des favoris */
+@import url("../variable.css");
 .favorites-container {
   width: 100%;
-  padding: 20px; /* Un peu d'espacement interne autour du conteneur */
+  padding: var(--spacing-sd);
   display: flex;
-  justify-content: center; /* Centrer le contenu */
+  justify-content: center;
 }
 
 .favorites-section {
-  padding: 20px;
-  max-width: 1200px;
+  padding: var(--spacing-sd);
+  max-width: calc(var(--spacing-sm) * 75);
   width: 100%;
   font-family: oswald, sans-serif;
 }
 
 .favorites-title {
-  font-size: 2rem;
+  font-size: var(--spacing-lg);
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-sd);
 }
 
-/* Bouton Clear */
 .clear-favorites-btn {
   display: block;
-  margin: 0 auto 20px;
-  padding: 10px 20px;
-  background-color: #ff4d4d;
-  color: white;
-  font-size: 1rem;
+  margin: 0 auto var(--spacing-sd);
+  padding: var(--spacing-xs) var(--spacing-sd);
+  background-color: var(--secondary-color);
+  color: var(--background-color);
+  font-size: var(--font-size-base);
   border: none;
-  border-radius: 5px;
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -40,18 +39,18 @@
 .favorites-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 80px;
+  gap: calc(var(--spacing-sm) * 5);
   justify-items: center;
 }
 
 .recipe-card-favorite {
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  background-color: var(--background-color);
+  border-radius: var(--border-radius-md);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  padding: var(--spacing-sm);
   text-align: center;
   width: 100%;
-  max-width: 300px;
+  max-width: calc(var(--spacing-sm) * 18.5);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -63,39 +62,39 @@
 
 .recipe-card-favorite img {
   width: 100%;
-  height: 150px;
+  height: calc(var(--spacing-sm) * 10);
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: var(--spacing-sm);
 }
 
 .recipe-card-favorite h3 {
-  font-size: 1.5rem;
+  font-size: var(--font-size-xl);
   font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-xs);
   flex-grow: 1;
 }
 
 .recipe-card-favorite p {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   color: #666;
   line-height: 1.5;
-  margin-bottom: 15px;
+  margin-bottom: var(--spacing-sm);
 }
 
 .recipe-card-favorite .show-recipe-button {
-  background-color: #ff6600;
+  background-color: var(--primary-color);
   border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
+  color: var(--background-color);
+  padding: var(--spacing-xs) var(--spacing-sd);
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
   transition: background-color 0.3s;
   margin-top: auto;
 }
 
 .recipe-card-favorite .show-recipe-button:hover {
-  background-color: #e65c00;
+  background-color: #a56736;
 }
 
 .recipe-card-favorite:hover {
@@ -106,10 +105,10 @@
   position: absolute;
   top: 5px;
   right: 5px;
-  background-color: #ff4d4d;
+  background-color: var(--secondary-color);
   border: none;
-  color: white;
-  padding: 8px 12px;
+  color: var(--background-color);
+  padding: var(--spacing-xs) var(--spacing-xm);
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -120,14 +119,15 @@
 }
 
 .remove-favorite-button i {
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg);
 }
 
 .no-favorites-message {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg);
   color: #777;
 }
+
 @media (max-width: 768px) {
   .favorites-grid {
     grid-template-columns: 1fr;

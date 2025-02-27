@@ -1,13 +1,13 @@
 @import url("../../variable.css");
 .carouselContainer {
   text-align: center;
-  margin: 2rem auto;
-  max-width: 1200px;
+  margin: var(--font-size-xxl) auto;
+  max-width: calc(var(--font-size-base) * 75);
 }
 
 .title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: var(--font-size-xxl);
+  margin-bottom: var(--font-size-base);
 }
 
 .carousel-content {
@@ -21,9 +21,9 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 2rem;
-  padding: 1rem;
-  color: #333;
+  font-size: var(--font-size-xxl);
+  padding: var(--font-size-base);
+  color: var(--text-color);
   transition: color 0.3s;
 }
 
@@ -33,20 +33,20 @@
 
 .carousel-cards {
   display: flex;
-  gap: 1rem;
+  gap: var(--spacing-sm);
   overflow: hidden;
   width: 100%;
-  max-width: 900px;
+  max-width: calc(var(--spacing-sm) * 55);
   justify-content: center;
 }
 
 .carousel-card {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  background: var(--background-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow-md);
+  padding: var(--spacing-sm);
   flex: 1;
-  max-width: 300px;
+  max-width: calc(var(--spacing-sm) * 18.5);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,7 +55,7 @@
 .carousel-image {
   width: 100%;
   height: auto;
-  border-radius: 4px;
+  border-radius: var(--border-radius-sm);
 }
 
 .recipeTitle {
@@ -65,10 +65,10 @@
 
 .card-button {
   background: var(--primary-color);
-  color: #fff;
+  color: var(--background-color);
   border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
   cursor: pointer;
   margin-top: auto;
   transition: background 0.3s;

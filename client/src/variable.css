@@ -12,11 +12,14 @@
   --font-size-lg: 1.25rem;
   --font-size-xl: 1.5rem;
   --font-size-xxl: 2rem;
+  --font-size-xxxl: 2rem;
   --font-fam: oswald, sans-serif;
 
   /* Espacements */
   --spacing-xs: 0.5rem;
+  --spacing-xm: 0.75rem;
   --spacing-sm: 1rem;
+  --spacing-sd: 1.25rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;

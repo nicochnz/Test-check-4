@@ -51,7 +51,7 @@ export default function FavoritesPage() {
                 <button
                   type="button"
                   onClick={() => handleRecipeClick(recipe.id)}
-                  className="button"
+                  className="show-recipe-button"
                 >
                   Show recipe
                 </button>

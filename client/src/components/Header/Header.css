@@ -4,13 +4,13 @@
   background-size: cover;
   background-position: center;
   padding: calc(var(--spacing-sm) * 3) 0;
-  color: #fff;
+  color: var(--background-color);
   text-align: center;
   position: relative;
 }
 
 .header-title {
-  font-size: 3rem;
+  font-size: var(--font-size-xxxl);
   font-family: oswald, sans-serif;
   margin-bottom: var(--spacing-md);
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
@@ -24,7 +24,7 @@
 
 .nav-button {
   background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  color: var(--background-color);
   border: none;
   padding: var(--spacing-xs) var(--spacing-md);
   border-radius: 5px;

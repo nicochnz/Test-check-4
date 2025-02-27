@@ -91,11 +91,7 @@ export default function Home() {
             {recipesSpoonacular.map((recipe) => (
               <div key={recipe.id} className="recipe-card">
                 <h3 className="">{recipe.title}</h3>
-                <img
-                  src={recipe.image}
-                  alt={recipe.title}
-                  style={{ width: "200px", borderRadius: "8px" }}
-                />
+                <img src={recipe.image} alt={recipe.title} />
                 <p>{recipe.summary}</p>
                 <button
                   type="button"
@@ -127,7 +123,6 @@ export default function Home() {
                 <img
                   src={`${import.meta.env.VITE_API_URL}/uploads/${recipe.image}`}
                   alt={recipe.name}
-                  style={{ width: "200px", borderRadius: "8px" }}
                 />
                 <p>{recipe.description}</p>
                 <button
