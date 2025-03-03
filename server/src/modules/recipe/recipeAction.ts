@@ -83,7 +83,6 @@ const add: RequestHandler = async (req, res, next) => {
         }))
       : [];
 
-    // Création de la recette et insertion des ingrédients
     const insertId = await recipeRepository.create(
       newRecipe,
       formattedIngredients,

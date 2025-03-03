@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import type { Recipe } from "../types/types";
 
 export const useHomePageLogic = () => {
-  // Gérer les favoris avec localStorage
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const [favorites, setFavorites] = useState<any[]>([]);
   const [querySpoonacular, setQuerySpoonacular] = useState<string>("");
@@ -14,7 +13,6 @@ export const useHomePageLogic = () => {
   const [errorSpoonacular, setErrorSpoonacular] = useState<string>("");
   const navigate = useNavigate();
 
-  // Récupérer les favoris depuis localStorage
   useEffect(() => {
     const storedFavorites = localStorage.getItem("favorites");
     if (storedFavorites) {
@@ -22,7 +20,6 @@ export const useHomePageLogic = () => {
     }
   }, []);
 
-  // Sauvegarder les favoris dans le localStorage lorsque l'état change
   useEffect(() => {
     if (favorites.length > 0) {
       localStorage.setItem("favorites", JSON.stringify(favorites));

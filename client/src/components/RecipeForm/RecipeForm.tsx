@@ -10,7 +10,7 @@ export default function RecipeForm() {
     removeIngredient,
     handleSubmit,
     formData,
-    categories,
+    // categories,
   } = useRecipeFormLogic();
 
   return (
@@ -48,7 +48,7 @@ export default function RecipeForm() {
         />
       </label>
 
-      <label className="label-recipe-form">
+      {/* <label className="label-recipe-form">
         Category :
         <select
           name="category"
@@ -63,7 +63,7 @@ export default function RecipeForm() {
             </option>
           ))}
         </select>
-      </label>
+      </label> */}
 
       <article className="ingredients-section">
         <label className="label-recipe-form" htmlFor="ingredients">

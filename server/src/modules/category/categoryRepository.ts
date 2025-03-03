@@ -21,7 +21,6 @@ class CategoryRepository {
     }
   }
 
-  // Méthode pour récupérer toutes les catégories
   async getAll() {
     const [rows] = await databaseClient.query<Rows>("SELECT * FROM category");
     return rows;

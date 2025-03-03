@@ -6,7 +6,6 @@ import "./Recipe.css";
 export default function RecipeComponent() {
   const navigate = useNavigate();
 
-  // Utilisation de la logique de recette
   const { recipe, loading, error } = useRecipePageLogic();
 
   if (loading) {

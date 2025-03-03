@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import CarouselRecipes from "./components/CarouselRecipes/CarouselRecipes";
-import FavoritesPage from "./components/FavoriteComponent";
+import FavoritesPage from "./components/Favorite/FavoriteComponent";
 import Header from "./components/Header/Header";
 import HomePage from "./components/Home/Home";
 import RecipePage from "./components/Recipe/RecipeComponent";

@@ -124,7 +124,13 @@ export default function Home() {
                   src={`${import.meta.env.VITE_API_URL}/uploads/${recipe.image}`}
                   alt={recipe.name}
                 />
-                <p>{recipe.description}</p>
+                <button
+                  type="button"
+                  onClick={() => navigate(`/recipe/${recipe.id}`)}
+                  className="button-home"
+                >
+                  Show recipe
+                </button>
                 <button
                   type="button"
                   onClick={() => handleAddRecipeToFavorites(recipe)}

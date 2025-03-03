@@ -1,4 +1,4 @@
-import { useHomePageLogic } from "../services/HomePageLogic";
+import { useHomePageLogic } from "../../services/HomePageLogic";
 import "./FavoriteComponent.css";
 import { useNavigate } from "react-router-dom";
 

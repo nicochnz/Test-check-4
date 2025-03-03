@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import type { Key } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Déclare les types pour les ingrédients
 type Ingredient = {
   id: Key | null | undefined;
   name: string;
   quantity: string;
 };
 type Category = {
-  id: string; // ou number, selon ton API
+  id: string;
   name: string;
 };
 export const useRecipeFormLogic = () => {
@@ -18,12 +17,11 @@ export const useRecipeFormLogic = () => {
     description: "",
     instructions: "",
     category: "",
-    ingredients: [{ name: "", quantity: "" }] as Ingredient[], // Typage explicite des ingrédients
+    ingredients: [{ name: "", quantity: "" }] as Ingredient[],
     image: null as File | null,
   });
   const navigate = useNavigate();
 
-  // Logique pour gérer les changements de champs
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -36,7 +34,6 @@ export const useRecipeFormLogic = () => {
     }));
   };
 
-  // Logique pour gérer les catégories (ajoute ici ta logique de fetch)
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
@@ -55,7 +52,6 @@ export const useRecipeFormLogic = () => {
 
     fetchCategories();
   }, []);
-  // Logique pour gérer les ingrédients
   const handleIngredientChange = (
     index: number,
     name: string,
