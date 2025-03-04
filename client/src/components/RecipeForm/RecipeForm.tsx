@@ -10,11 +10,12 @@ export default function RecipeForm() {
     removeIngredient,
     handleSubmit,
     formData,
+    // categories,
   } = useRecipeFormLogic();
 
   return (
     <form onSubmit={handleSubmit} className="recipe-form">
-      <h2>Create recipe :</h2>
+      <h2 className="title-recipe-form">Create recipe :</h2>
 
       <label className="label-recipe-form">
         Title :
@@ -27,7 +28,7 @@ export default function RecipeForm() {
         />
       </label>
 
-      <label>
+      <label className="label-recipe-form">
         Image :
         <input
           lang="en"
@@ -47,10 +48,29 @@ export default function RecipeForm() {
         />
       </label>
 
+      {/* <label className="label-recipe-form">
+        Category :
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select a category</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </label> */}
+
       <article className="ingredients-section">
-        <label htmlFor="ingredients">Ingrédients :</label>
+        <label className="label-recipe-form" htmlFor="ingredients">
+          Ingrédients :
+        </label>
         {formData.ingredients.map((ingredient, index) => (
-          <div key={`ingredient-${index}`} className="ingredient-item">
+          <div key={ingredient.id} className="ingredient-item">
             <input
               id={`ingredient-name-${index}`}
               type="text"
@@ -90,7 +110,7 @@ export default function RecipeForm() {
         </button>
       </article>
 
-      <label>
+      <label className="label-recipe-form">
         Instructions :
         <textarea
           name="instructions"

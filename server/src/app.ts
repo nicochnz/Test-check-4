@@ -1,7 +1,6 @@
 // Load the express module to create a web application
 
 import express from "express";
-
 const app = express();
 app.use(express.json());
 // Configure it

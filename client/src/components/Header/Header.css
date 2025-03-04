@@ -1,38 +1,38 @@
-/* Styles pour le Header */
+@import url("../../variable.css");
 .header {
-  background-image: url("/src/assets/images/Girl-kitchen.jpg"); /* Remplace cette URL par l'image de fond de ton choix */
+  background-image: url("/src/assets/images/Girl-kitchen.jpg");
   background-size: cover;
   background-position: center;
-  padding: 40px 0;
-  color: #fff;
+  padding: calc(var(--spacing-sm) * 3) 0;
+  color: var(--background-color);
   text-align: center;
   position: relative;
 }
 
 .header-title {
-  font-size: 3rem;
-  font-family: "Lobster", cursive;
-  margin-bottom: 20px;
+  font-size: var(--font-size-xxxl);
+  font-family: oswald, sans-serif;
+  margin-bottom: var(--spacing-md);
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .header-nav {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: var(--spacing-md);
 }
 
 .nav-button {
   background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  color: var(--background-color);
   border: none;
-  padding: 10px 20px;
+  padding: var(--spacing-xs) var(--spacing-md);
   border-radius: 5px;
-  font-size: 1.1rem;
+  font-size: var(--font-size-base);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--spacing-xs);
   transition: background-color 0.3s ease;
 }
 
@@ -41,39 +41,43 @@
 }
 
 .home-button {
-  background-color: #c47c44;
+  background-color: var(--primary-color);
 }
 
 .favorites-button {
-  background-color: rgba(255, 0, 0, 0.7); /* Un rouge chaleureux pour les Favoris */
+  background-color: var(--secondary-color);
 }
 
 .nav-button i {
-  font-size: 1.5rem;
+  font-size: var(--font-size-xl);
 }
 
 .header-content {
   position: relative;
-  z-index: 2; /* Pour que le texte soit au-dessus de l'image de fond */
+  z-index: 2;
 }
+
 .nav-button.favorites-button {
-  text-decoration: none; /* Enlève le soulignement */
+  text-decoration: none;
 }
+
 .nav-button.create-recipe-button {
-  text-decoration: none; /* Enlève le soulignement */
+  text-decoration: none;
 }
+
 .nav-button.home-button {
-  text-decoration: none; /* Enlève le soulignement */
+  text-decoration: none;
 }
+
 @media (max-width: 768px) {
   .header-title {
-    font-size: 2rem;
+    font-size: var(--font-size-xxl);
   }
 
   .header-nav {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: var(--spacing-sm);
   }
 }

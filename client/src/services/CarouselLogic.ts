@@ -10,8 +10,7 @@ interface Recipe {
 
 export const useCarouselLogic = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [imgIndex, setImgIndex] = useState<number>(0);
-  const [_, setLoading] = useState<boolean>(true);
+  const [currentIndex, _] = useState<number>(0);
   const navigate = useNavigate();
 
   const handleRecipeClick = (recipeId: number) => {
@@ -20,7 +19,7 @@ export const useCarouselLogic = () => {
 
   useEffect(() => {
     fetch(
-      "https://api.spoonacular.com/recipes/random?number=5&apiKey=070d351c3e8b449b97fcd87bb52f1c24",
+      "https://api.spoonacular.com/recipes/random?number=9&apiKey=f35c2233c4be4cc6b222f6cfec191abd",
     )
       .then((response) => response.json())
       .then((data) => {
@@ -29,29 +28,25 @@ export const useCarouselLogic = () => {
         } else {
           console.error("No recipes found in the response.");
         }
-        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching recipes:", error);
-        setLoading(false);
       });
   }, []);
 
-  const goToNext = () => {
-    setImgIndex((prevIndex) => (prevIndex + 1) % recipes.length);
+  const getVisibleRecipes = () => {
+    if (recipes.length === 0) return [];
+    const leftIndex = (currentIndex - 1 + recipes.length) % recipes.length;
+    const centerIndex = currentIndex;
+    const rightIndex = (currentIndex + 1) % recipes.length;
+    return [recipes[leftIndex], recipes[centerIndex], recipes[rightIndex]];
   };
 
-  const goToPrev = () => {
-    setImgIndex((prevIndex) =>
-      prevIndex === 0 ? recipes.length - 1 : prevIndex - 1,
-    );
-  };
+  const visibleRecipes = getVisibleRecipes();
 
   return {
-    imgIndex,
     recipes,
-    goToNext,
-    goToPrev,
+    visibleRecipes,
     handleRecipeClick,
   };
 };

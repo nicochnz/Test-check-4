@@ -90,18 +90,15 @@ export default function Home() {
           <div className="recipes-grid">
             {recipesSpoonacular.map((recipe) => (
               <div key={recipe.id} className="recipe-card">
-                <h3>{recipe.title}</h3>
-                <img
-                  src={recipe.image}
-                  alt={recipe.title}
-                  style={{ width: "200px", borderRadius: "8px" }}
-                />
+                <h3 className="">{recipe.title}</h3>
+                <img src={recipe.image} alt={recipe.title} />
                 <p>{recipe.summary}</p>
                 <button
                   type="button"
                   onClick={() => navigate(`/recipe/${recipe.id}`)}
+                  className="button-home"
                 >
-                  More Information
+                  Show recipe
                 </button>
                 <button
                   type="button"
@@ -126,9 +123,14 @@ export default function Home() {
                 <img
                   src={`${import.meta.env.VITE_API_URL}/uploads/${recipe.image}`}
                   alt={recipe.name}
-                  style={{ width: "200px", borderRadius: "8px" }}
                 />
-                <p>{recipe.description}</p>
+                <button
+                  type="button"
+                  onClick={() => navigate(`/recipe/${recipe.id}`)}
+                  className="button-home"
+                >
+                  Show recipe
+                </button>
                 <button
                   type="button"
                   onClick={() => handleAddRecipeToFavorites(recipe)}

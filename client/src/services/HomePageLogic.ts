@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import type { Recipe } from "../types/types";
 
 export const useHomePageLogic = () => {
-  // Gérer les favoris avec localStorage
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const [favorites, setFavorites] = useState<any[]>([]);
   const [querySpoonacular, setQuerySpoonacular] = useState<string>("");
@@ -14,7 +13,6 @@ export const useHomePageLogic = () => {
   const [errorSpoonacular, setErrorSpoonacular] = useState<string>("");
   const navigate = useNavigate();
 
-  // Récupérer les favoris depuis localStorage
   useEffect(() => {
     const storedFavorites = localStorage.getItem("favorites");
     if (storedFavorites) {
@@ -22,7 +20,6 @@ export const useHomePageLogic = () => {
     }
   }, []);
 
-  // Sauvegarder les favoris dans le localStorage lorsque l'état change
   useEffect(() => {
     if (favorites.length > 0) {
       localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -58,7 +55,7 @@ export const useHomePageLogic = () => {
     setLoadingSpoonacular(true);
     try {
       const response = await fetch(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=070d351c3e8b449b97fcd87bb52f1c24 `,
+        `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=f35c2233c4be4cc6b222f6cfec191abd`,
       );
       const data = await response.json();
       if (response.ok) {

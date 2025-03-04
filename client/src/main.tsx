@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import CarouselRecipes from "./components/CarouselRecipes/CarouselRecipes";
-import FavoritesPage from "./components/FavoriteComponent";
+import FavoritesPage from "./components/Favorite/FavoriteComponent";
 import Header from "./components/Header/Header";
 import HomePage from "./components/Home/Home";
 import RecipePage from "./components/Recipe/RecipeComponent";
@@ -27,9 +27,8 @@ const router = createBrowserRouter([
         path: "/recipe/:id",
         element: (
           <>
-            {" "}
             <Header />
-            <RecipePage />{" "}
+            <RecipePage />
           </>
         ),
       },
@@ -37,8 +36,7 @@ const router = createBrowserRouter([
         path: "/favorites",
         element: (
           <>
-            {" "}
-            <Header /> <FavoritesPage />{" "}
+            <Header /> <FavoritesPage />
           </>
         ),
       },
@@ -46,7 +44,7 @@ const router = createBrowserRouter([
         path: "/recipeform",
         element: (
           <>
-            <Header /> <RecipeForm />{" "}
+            <Header /> <RecipeForm />
           </>
         ),
       },

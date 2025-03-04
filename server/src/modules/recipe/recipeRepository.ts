@@ -10,6 +10,7 @@ type Recipe = {
   servings: number;
   user_id?: number;
   image?: string;
+  category_id: number | null;
 };
 
 type Ingredient = {
@@ -27,24 +28,23 @@ class RecipeRepository {
     try {
       await connection.beginTransaction();
 
-      // Insertion de la recette
       const [recipeResult] = await connection.query<Result>(
-        `INSERT INTO recipes (name, description, instructions, cooking_time, servings, user_id, image) 
-         VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO recipes (name, description, instructions, cooking_time, servings, image, category_id, user_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           recipe.name,
           recipe.description,
           recipe.instructions,
           recipe.cooking_time,
           recipe.servings,
-          recipe.user_id,
           recipe.image,
+          recipe.category_id,
+          recipe.user_id,
         ],
       );
 
       const recipeId = recipeResult.insertId;
 
-      // Insertion des ingrédients et lien avec la recette
       for (const ingredient of ingredients) {
         const [ingredientResult] = await connection.query<Result>(
           `INSERT INTO ingredients (name, quantity)
@@ -86,7 +86,8 @@ class RecipeRepository {
   }
 
   async fetchFromSpoonacular(query: string) {
-    const apiKey = "070d351c3e8b449b97fcd87bb52f1c24 ";
+    const apiKey = process.env.SPOONACULAR_API_KEY;
+
     const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${query}`;
 
     try {

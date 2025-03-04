@@ -1,33 +1,28 @@
+@import url("../../variable.css");
 .recipe-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background-color: #f9f9f9;
-  border-radius: 10px;
-  padding: 30px;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
   width: 100%;
-  max-width: 600px;
-  margin: 40px auto;
+  max-width: calc(var(--spacing-sm) * 37.5);
+  margin: var(--spacing-lg) auto;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+.title-recipe-form {
+  font-size: var(--font-size-xxl);
+  margin-bottom: var(--spacing-md);
   color: #4e4e4e;
-  font-family: "Lobster", cursive;
+  font-family: oswald, sans-serif;
 }
 
 .label-recipe-form {
-  font-size: 1.1rem;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-label {
-  font-size: 1rem;
-  color: #333;
-  margin-bottom: 10px;
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+  margin-bottom: var(--spacing-xs);
   display: block;
   font-weight: bold;
 }
@@ -36,36 +31,35 @@ input[type="text"],
 textarea,
 input[type="file"] {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
+  padding: 0.75rem;
+  margin-bottom: var(--spacing-md);
   border: 2px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
-  color: #555;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-base);
+  color: var(--text-color);
   transition: border-color 0.3s;
 }
 
 input[type="text"]:focus,
 textarea:focus,
 input[type="file"]:focus {
-  border-color: #c47c44;
+  border-color: var(--primary-color);
   outline: none;
 }
 
 textarea {
   resize: vertical;
-  height: 150px;
+  height: calc(var(--spacing-sm) * 9.5);
 }
 
-/* Boutons */
 .recipe-form__button {
-  background-color: #c47c44;
-  color: white;
-  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  padding: var(--spacing-xs) var(--font-size-lg);
   border: none;
-  border-radius: 5px;
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   transition: background-color 0.3s, transform 0.3s;
 }
 
@@ -79,15 +73,14 @@ textarea {
   cursor: not-allowed;
 }
 
-/* Bouton de suppression des ingrédients */
 .delete-button-recipe-form {
-  background-color: #ff4d4d;
-  color: white;
-  padding: 6px 12px;
+  background-color: var(--secondary-color);
+  color: var(--background-color);
+  padding: 6px var(--font-size-xs);
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg);
   transition: background-color 0.3s;
 }
 
@@ -95,37 +88,36 @@ textarea {
   background-color: #ff1a1a;
 }
 
-/* Section des ingrédients */
 .ingredients-section {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: var(--font-size-lg);
 }
 
 .ingredient-item {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
-  gap: 10px;
+  margin-bottom: var(--spacing-sm);
+  gap: var(--spacing-xs);
 }
 
 .ingredient-item input {
   width: 45%;
-  padding: 10px;
-  font-size: 1rem;
+  padding: var(--spacing-xs);
+  font-size: var(--font-size-base);
   border: 2px solid #ddd;
-  border-radius: 5px;
+  border-radius: var(--border-radius-sm);
 }
 
 .ingredient-item input:focus {
-  border-color: #c47c44;
+  border-color: var(--primary-color);
 }
 
 .add-button-recipe-form {
   background-color: #4caf50;
-  color: white;
-  font-size: 1rem;
-  padding: 12px 20px;
-  margin-top: 10px;
+  color: var(--background-color);
+  font-size: var(--font-size-base);
+  padding: var(--spacing-xm) var(--spacing-md);
+  margin-top: var(--spacing-xm);
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -136,16 +128,15 @@ textarea {
   background-color: #45a049;
 }
 
-/* Position des boutons dans le formulaire */
 .submit-button-recipe-form {
   width: 100%;
-  background-color: #c47c44;
-  color: white;
-  padding: 14px;
-  font-size: 1.1rem;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  padding: var(--spacing-xm);
+  font-size: var(--font-size-base);
   text-transform: uppercase;
-  margin-top: 20px;
-  border-radius: 8px;
+  margin-top: var(--font-size-lg);
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -155,14 +146,13 @@ textarea {
   transform: translateY(-2px);
 }
 
-/* Responsivité */
 @media (max-width: 768px) {
   .recipe-form {
-    padding: 20px;
+    padding: var(--font-size-lg);
   }
 
   h2 {
-    font-size: 1.6rem;
+    font-size: var(--font-size-xl);
   }
 
   .ingredient-item input {
@@ -170,11 +160,11 @@ textarea {
   }
 
   .submit-button-recipe-form {
-    font-size: 1rem;
+    font-size: var(--font-size-base);
   }
 
   .recipe-form__button {
-    font-size: 1rem;
+    font-size: var(--font-size-base);
   }
 
   .add-button-recipe-form,

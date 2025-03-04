@@ -1,16 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { Key } from "react";
+import { useNavigate } from "react-router-dom";
 
+type Ingredient = {
+  id: Key | null | undefined;
+  name: string;
+  quantity: string;
+};
+type Category = {
+  id: string;
+  name: string;
+};
 export const useRecipeFormLogic = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     instructions: "",
-    ingredients: [{ name: "", quantity: "" }], // Tableau d'objets avec name et quantity
-    image: null as File | null, // Pour gérer l'image
+    category: "",
+    ingredients: [{ name: "", quantity: "" }] as Ingredient[],
+    image: null as File | null,
   });
+  const navigate = useNavigate();
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -19,15 +34,24 @@ export const useRecipeFormLogic = () => {
     }));
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) {
-      setFormData((prev) => ({
-        ...prev,
-        image: e.target.files?.[0] ?? null,
-      }));
-    }
-  };
+  const [categories, setCategories] = useState<Category[]>([]);
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://localhost:3310/api/categories");
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des catégories");
+        }
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error("Erreur:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
   const handleIngredientChange = (
     index: number,
     name: string,
@@ -44,7 +68,7 @@ export const useRecipeFormLogic = () => {
   const addIngredient = () => {
     setFormData((prev) => ({
       ...prev,
-      ingredients: [...prev.ingredients, { name: "", quantity: "" }],
+      ingredients: [...prev.ingredients, { id: null, name: "", quantity: "" }],
     }));
   };
 
@@ -54,6 +78,15 @@ export const useRecipeFormLogic = () => {
       ...prev,
       ingredients: newIngredients,
     }));
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files?.[0]) {
+      setFormData((prev) => ({
+        ...prev,
+        image: e.target.files?.[0] ?? null,
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -90,7 +123,9 @@ export const useRecipeFormLogic = () => {
         throw new Error(`Erreur ${response.status}: ${errorText}`);
       }
 
+      const data = await response.json();
       alert("Recette créée avec succès !");
+      navigate(`/recipe/${data.recipeId}`);
     } catch (error) {
       console.error("Erreur détaillée:", error);
       alert(
@@ -100,6 +135,7 @@ export const useRecipeFormLogic = () => {
       );
     }
   };
+
   return {
     handleChange,
     handleImageChange,
@@ -108,5 +144,6 @@ export const useRecipeFormLogic = () => {
     removeIngredient,
     handleSubmit,
     formData,
+    categories,
   };
 };

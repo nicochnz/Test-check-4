@@ -2,7 +2,7 @@
   /* Couleurs principales */
   --primary-color: #c47c44;
   --secondary-color: rgba(255, 0, 0, 0.7);
-  --background-color: #f5f5f5;
+  --background-color: rgb(245, 245, 245);
   --text-color: #333;
 
   /* Typographie */
@@ -12,10 +12,14 @@
   --font-size-lg: 1.25rem;
   --font-size-xl: 1.5rem;
   --font-size-xxl: 2rem;
+  --font-size-xxxl: 2rem;
+  --font-fam: oswald, sans-serif;
 
   /* Espacements */
   --spacing-xs: 0.5rem;
+  --spacing-xm: 0.75rem;
   --spacing-sm: 1rem;
+  --spacing-sd: 1.25rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
