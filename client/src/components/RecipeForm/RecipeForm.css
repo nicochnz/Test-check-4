@@ -146,6 +146,24 @@ textarea {
   transform: translateY(-2px);
 }
 
+.success-popup {
+  position: fixed;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: var(--primary-color);
+  color: var(--background-color);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.success-popup.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 @media (max-width: 768px) {
   .recipe-form {
     padding: var(--font-size-lg);

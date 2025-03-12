@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Recipe } from "../types/types";
 
 export const useHomePageLogic = () => {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const [favorites, setFavorites] = useState<any[]>([]);
+  const [favorites, setFavorites] = useState<Recipe[]>([]);
   const [querySpoonacular, setQuerySpoonacular] = useState<string>("");
   const [queryUserRecipes, setQueryUserRecipes] = useState<string>("");
   const [recipesSpoonacular, setRecipesSpoonacular] = useState<Recipe[]>([]);
@@ -26,12 +25,11 @@ export const useHomePageLogic = () => {
     }
   }, [favorites]);
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const handleAddToFavorites = (recipe: any) => {
+  const handleAddToFavorites = (recipe: Recipe) => {
     setFavorites((prevFavorites) => [...prevFavorites, recipe]);
   };
 
-  const fetchUserRecipes = async () => {
+  const fetchUserRecipes = useCallback(async () => {
     try {
       const response = await fetch("http://localhost:3310/api/recipes");
       const data = await response.json();
@@ -44,12 +42,10 @@ export const useHomePageLogic = () => {
         err,
       );
     }
-  };
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  }, []);
   useEffect(() => {
     fetchUserRecipes();
-  }, []);
+  }, [fetchUserRecipes]);
 
   const handleSearchSpoonacular = async (query: string) => {
     setLoadingSpoonacular(true);

@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-interface Recipe {
-  id: number;
-  title: string;
-  image: string;
-  sourceUrl: string;
-}
+import type { Recipe } from "../types/types";
 
 export const useCarouselLogic = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);

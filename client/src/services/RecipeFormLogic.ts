@@ -1,16 +1,9 @@
-import { useEffect, useState } from "react";
-import type { Key } from "react";
-import { useNavigate } from "react-router-dom";
-
-type Ingredient = {
-  id: Key | null | undefined;
-  name: string;
-  quantity: string;
-};
-type Category = {
-  id: string;
-  name: string;
-};
+import { useState } from "react";
+import type { Ingredient } from "../types/types";
+// type Category = {
+//   id: string;
+//   name: string;
+// };
 export const useRecipeFormLogic = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -20,7 +13,6 @@ export const useRecipeFormLogic = () => {
     ingredients: [{ name: "", quantity: "" }] as Ingredient[],
     image: null as File | null,
   });
-  const navigate = useNavigate();
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -34,24 +26,24 @@ export const useRecipeFormLogic = () => {
     }));
   };
 
-  const [categories, setCategories] = useState<Category[]>([]);
+  // const [categories, setCategories] = useState<Category[]>([]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch("http://localhost:3310/api/categories");
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des catégories");
-        }
-        const data = await response.json();
-        setCategories(data);
-      } catch (error) {
-        console.error("Erreur:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:3310/api/categories");
+  //       if (!response.ok) {
+  //         throw new Error("Erreur lors de la récupération des catégories");
+  //       }
+  //       const data = await response.json();
+  //       setCategories(data);
+  //     } catch (error) {
+  //       console.error("Erreur:", error);
+  //     }
+  //   };
 
-    fetchCategories();
-  }, []);
+  //   fetchCategories();
+  // }, []);
   const handleIngredientChange = (
     index: number,
     name: string,
@@ -88,7 +80,16 @@ export const useRecipeFormLogic = () => {
       }));
     }
   };
-
+  const showSuccessPopup = (message: string) => {
+    const popup = document.querySelector(".success-popup");
+    if (popup) {
+      popup.textContent = message;
+      popup.classList.add("show");
+      setTimeout(() => {
+        popup.classList.remove("show");
+      }, 2000);
+    }
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const USER_ID = "1";
@@ -123,9 +124,8 @@ export const useRecipeFormLogic = () => {
         throw new Error(`Erreur ${response.status}: ${errorText}`);
       }
 
-      const data = await response.json();
-      alert("Recette créée avec succès !");
-      navigate(`/recipe/${data.recipeId}`);
+      await response.json();
+      showSuccessPopup("Recette créée avec succès !");
     } catch (error) {
       console.error("Erreur détaillée:", error);
       alert(
@@ -144,6 +144,6 @@ export const useRecipeFormLogic = () => {
     removeIngredient,
     handleSubmit,
     formData,
-    categories,
+    // categories,
   };
 };

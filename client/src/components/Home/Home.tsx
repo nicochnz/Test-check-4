@@ -1,14 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useHomePageLogic } from "../../services/HomePageLogic";
 import "./Home.css";
-
+import type { Recipe } from "../../types/types";
 export default function Home() {
   const {
     querySpoonacular,
     setQuerySpoonacular,
     recipesSpoonacular,
     loadingSpoonacular,
-    errorSpoonacular,
     handleSearchSpoonacular,
     queryUserRecipes,
     setQueryUserRecipes,
@@ -29,7 +28,8 @@ export default function Home() {
   };
 
   const handleSubmitSpoonacular = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    // Ca c'est pour du typage correct de l'evenement
+    e.preventDefault(); // Ca ça permet de faire en sorte que la page ne se recharge pas
     handleSearchSpoonacular(querySpoonacular);
   };
 
@@ -38,8 +38,7 @@ export default function Home() {
     handleSearchUserRecipes(queryUserRecipes);
   };
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const handleAddRecipeToFavorites = (recipe: Record<string, any>) => {
+  const handleAddRecipeToFavorites = (recipe: Recipe) => {
     handleAddToFavorites(recipe);
 
     const storedFavorites = localStorage.getItem("favorites");
@@ -81,8 +80,6 @@ export default function Home() {
           Search User Recipes
         </button>
       </form>
-
-      {errorSpoonacular && <p style={{ color: "red" }}>{errorSpoonacular}</p>}
 
       {recipesSpoonacular.length > 0 && (
         <article>

@@ -2,6 +2,7 @@ import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
 import { useRecipePageLogic } from "../../services/RecipePageLogic";
 import "./Recipe.css";
+import type { Recipe } from "../../types/types";
 
 export default function RecipeComponent() {
   const navigate = useNavigate();
@@ -32,8 +33,7 @@ export default function RecipeComponent() {
     const storedFavorites = localStorage.getItem("favorites");
     const favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
 
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    if (!favorites.some((fav: any) => fav.id === recipe.id)) {
+    if (!favorites.some((fav: Recipe) => fav.id === recipe.id)) {
       favorites.push(recipe);
       localStorage.setItem("favorites", JSON.stringify(favorites));
       showFavPopup();

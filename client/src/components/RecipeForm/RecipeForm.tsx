@@ -119,10 +119,13 @@ export default function RecipeForm() {
           required
         />
       </label>
+      <div>
+        <button type="submit" className="submit-button-recipe-form">
+          Add recipe
+        </button>
 
-      <button type="submit" className="submit-button-recipe-form">
-        Add recipe
-      </button>
+        <div className="success-popup">Recette ajoutée avec succès !</div>
+      </div>
     </form>
   );
 }

@@ -1,3 +1,4 @@
+import type { Key } from "react";
 export type Recipe = {
   id: number;
   name: string;
@@ -7,6 +8,7 @@ export type Recipe = {
   summary: string;
   instructions: string;
   servings: number;
+  sourceUrl: string;
   readyInMinutes: number;
   source: "spoonacular" | "user";
 };
@@ -17,4 +19,10 @@ export type RecipeFormData = {
   description: string;
   ingredients: string[];
   instructions: string;
+};
+
+export type Ingredient = {
+  id: Key | null | undefined;
+  name: string;
+  quantity: string;
 };

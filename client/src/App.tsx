@@ -5,5 +5,6 @@ export default function App() {
     <>
       <Outlet />
     </>
+    //Outlet c'est un composant react qui relie les routes de main.tsx
   );
 }

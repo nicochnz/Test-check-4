@@ -11,8 +11,10 @@ export default function FavoritesPage() {
     setFavorites([]);
   };
 
-  const removeFavorite = (index: number) => {
-    const updatedFavorites = favorites.filter((_, i) => i !== index);
+  const removeFavorite = (recipeId: number) => {
+    const updatedFavorites = favorites.filter(
+      (recipe) => recipe.id !== recipeId,
+    );
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     setFavorites(updatedFavorites);
   };
@@ -36,8 +38,8 @@ export default function FavoritesPage() {
           {favorites.length === 0 ? (
             <p className="no-favorites-message">No favorites yet!</p>
           ) : (
-            favorites.map((recipe, index) => (
-              <div key={index} className="recipe-card-favorite">
+            favorites.map((recipe) => (
+              <div key={recipe.id} className="recipe-card-favorite">
                 <h3 className="recipe-title">{recipe.title || recipe.name}</h3>
                 <img
                   src={
@@ -57,7 +59,7 @@ export default function FavoritesPage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => removeFavorite(index)}
+                  onClick={() => removeFavorite(recipe.id)}
                   className="remove-favorite-button"
                 >
                   <i className="fas fa-times" />
