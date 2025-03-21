@@ -128,6 +128,17 @@ class RecipeRepository {
       connection.release();
     }
   }
+
+  async getRecipeIngredients(recipeId: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT i.name, ri.quantity 
+       FROM ingredients i 
+       JOIN recipe_ingredients ri ON i.id = ri.ingredients_id 
+       WHERE ri.recipe_id = ?`,
+      [recipeId],
+    );
+    return rows;
+  }
 }
 
 export default new RecipeRepository();

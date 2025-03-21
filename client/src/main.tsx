@@ -33,6 +33,15 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/user-recipe/:id",
+        element: (
+          <>
+            <Header />
+            <RecipePage />
+          </>
+        ),
+      },
+      {
         path: "/favorites",
         element: (
           <>

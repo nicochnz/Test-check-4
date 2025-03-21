@@ -123,7 +123,7 @@ export default function Home() {
                 />
                 <button
                   type="button"
-                  onClick={() => navigate(`/recipe/${recipe.id}`)}
+                  onClick={() => navigate(`/user-recipe/${recipe.id}`)}
                   className="button-home"
                 >
                   Show recipe

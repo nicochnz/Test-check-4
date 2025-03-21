@@ -49,6 +49,12 @@ export const useRecipeFormLogic = () => {
     name: string,
     value: string,
   ) => {
+    if (name === "quantity") {
+      if (!/^\d*$/.test(value)) {
+        alert("Veuillez entrer uniquement des chiffres pour la quantité");
+        return;
+      }
+    }
     const newIngredients = [...formData.ingredients];
     newIngredients[index] = { ...newIngredients[index], [name]: value };
     setFormData((prev) => ({
@@ -73,10 +79,19 @@ export const useRecipeFormLogic = () => {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) {
+    const file = e.target.files?.[0];
+    if (file) {
+      const validTypes = ["image/jpeg", "image/png"];
+      if (!validTypes.includes(file.type)) {
+        alert(
+          "Veuillez sélectionner uniquement des images au format JPEG ou PNG",
+        );
+        e.target.value = "";
+        return;
+      }
       setFormData((prev) => ({
         ...prev,
-        image: e.target.files?.[0] ?? null,
+        image: file,
       }));
     }
   };

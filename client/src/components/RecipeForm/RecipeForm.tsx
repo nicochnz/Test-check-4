@@ -33,7 +33,7 @@ export default function RecipeForm() {
         <input
           lang="en"
           type="file"
-          accept="image/*"
+          accept=".jpg,.jpeg,.png"
           onChange={handleImageChange}
         />
       </label>

@@ -1,6 +1,6 @@
 import { log } from "node:console";
 import type { RequestHandler } from "express";
-import categoryRepository from "../category/categoryRepository"; // Assure-toi que tu importes le repository pour gérer les catégories
+import categoryRepository from "../category/categoryRepository";
 import recipeRepository from "./recipeRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -20,7 +20,8 @@ const read: RequestHandler = async (req, res, next) => {
     if (!recipe) {
       res.sendStatus(404);
     } else {
-      res.json(recipe);
+      const ingredients = await recipeRepository.getRecipeIngredients(recipeId);
+      res.json({ ...recipe, ingredients });
     }
   } catch (err) {
     next(err);

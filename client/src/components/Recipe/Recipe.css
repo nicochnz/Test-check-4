@@ -44,6 +44,25 @@
   margin-right: auto;
 }
 
+.recipe-ingredients-title {
+  font-size: var(--font-size-xl);
+  color: var(--secondary-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.recipe-ingredients {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto var(--spacing-md);
+  max-width: 65ch;
+  text-align: left;
+}
+
+.recipe-ingredients li {
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-color);
+}
+
 .recipe-cooking-time {
   font-size: var(--font-size-base);
   color: var(--primary-color);

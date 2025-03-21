@@ -1,5 +1,6 @@
 import type { Key } from "react";
 export type Recipe = {
+  ingredients: boolean;
   id: number;
   name: string;
   description: string;

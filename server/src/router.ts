@@ -7,6 +7,7 @@ const router = express.Router();
 router.get("/api/recipes", recipeAction.browse);
 router.get("/api/recipes/:id", recipeAction.read);
 router.post("/api/recipes", upload.single("image"), recipeAction.add);
+router.get("/api/user-recipe/:id", recipeAction.read);
 
 router.get("/api/recipes/search", recipeAction.browseFromSpoonacular);
 router.get("/api/categories", categoryAction.browse);
